@@ -1,11 +1,10 @@
 package com.cg.hba.entity;
 
-<<<<<<< Updated upstream
 import java.util.Date;
-=======
+
 import java.io.Serializable;
 import java.util.Date; 
->>>>>>> Stashed changes
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,24 +13,9 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
-<<<<<<< Updated upstream
-@Component
-@Entity
-public class BookingDetails {
-
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)	
- int booking_id;
- int hotel_id;
- int room_id;
- Date booked_from;
- Date booked_to;
- int no_of_adults;
- int no_of_children;
- double amount;
-=======
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Component
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
@@ -52,7 +36,7 @@ public class BookingDetails implements Serializable{
  private int no_of_adults;
  private int no_of_children;
  private double amount;
->>>>>>> Stashed changes
+
  
 public BookingDetails() {
 	super();
@@ -141,8 +125,7 @@ public String toString() {
 			+ ", booked_from=" + booked_from + ", booked_to=" + booked_to + ", no_of_adults=" + no_of_adults
 			+ ", no_of_children=" + no_of_children + ", amount=" + amount + "]";
 }
-<<<<<<< Updated upstream
+
 }
-=======
-}
->>>>>>> Stashed changes
+
+

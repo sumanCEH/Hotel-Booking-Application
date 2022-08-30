@@ -1,10 +1,6 @@
 package com.cg.hba.service;
 
-<<<<<<< Updated upstream
-import java.util.List;
-=======
 import java.util.List; 
->>>>>>> Stashed changes
 
 import javax.transaction.Transactional;
 
@@ -38,24 +34,6 @@ public class IBookingDetailsServiceImpl implements IBookingDetailsService{
 	}
 
 	@Override
-<<<<<<< Updated upstream
-	public BookingDetails removeBookingDetails(BookingDetails bookingdetails) {
-		 repo.deleteById(bookingdetails.getBooking_id());
-		return bookingdetails;
-	}
-
-	@Override
-	public List<BookingDetails> showAllBookingDetails(BookingDetails bookingdetails) {
-		return repo.findAll();
-	}
-
-	@Override
-	public BookingDetails showBookingDetails(BookingDetails bookingdetails) {
-		return repo.getById(bookingdetails.getBooking_id());
-	}
-
-}
-=======
 	public BookingDetails removeBookingDetails(int booking_id) {
 		 BookingDetails bd= repo.getById(booking_id);
 		 repo.deleteById(booking_id);
@@ -75,4 +53,3 @@ public class IBookingDetailsServiceImpl implements IBookingDetailsService{
 	}
 
 }
->>>>>>> Stashed changes
