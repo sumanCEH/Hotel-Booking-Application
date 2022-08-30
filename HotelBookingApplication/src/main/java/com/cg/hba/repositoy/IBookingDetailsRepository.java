@@ -6,4 +6,8 @@ import com.cg.hba.entity.BookingDetails;
 
 public interface IBookingDetailsRepository extends JpaRepository<BookingDetails, Integer>{
 
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
