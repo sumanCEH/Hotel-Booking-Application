@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.hba.entity.User;
+import com.cg.hba.exceptions.RemoveUserException;
+import com.cg.hba.exceptions.UserNotFoundException;
 import com.cg.hba.service.UserService;
 
 
@@ -29,7 +31,7 @@ public class UserController {
 	
 	
 	@GetMapping("/showall")
-	public ResponseEntity<?> listUser(){		
+	public ResponseEntity<?> listUser() throws UserNotFoundException{		
 		return new ResponseEntity<>(userService.ShowAllUser(),HttpStatus.OK);
 	}
 	
@@ -40,18 +42,18 @@ public class UserController {
 	
 	
 	@PutMapping("/update/{user_id}")
-	public ResponseEntity<?> updateuser(@PathVariable Integer user_id , @RequestBody User user) {		
+	public ResponseEntity<?> updateuser(@PathVariable Integer user_id , @RequestBody User user) throws UserNotFoundException {		
 		return new ResponseEntity<>(userService.updateUser(user_id , user), HttpStatus.OK);
 	}
 	
 	@GetMapping("/showuser/{user_id}")
-	public  ResponseEntity<?> showUser(@PathVariable("user_id") Integer user_id) {
+	public  ResponseEntity<?> showUser(@PathVariable("user_id") Integer user_id) throws UserNotFoundException {
 		return new ResponseEntity<>(userService.ShowUser(user_id),HttpStatus.OK);
 	}
 	
 	
 	@DeleteMapping("/remove/{user_id}")
-	public ResponseEntity<?> remove(@PathVariable("user_id") Integer user_id ){
+	public ResponseEntity<?> remove(@PathVariable("user_id") Integer user_id ) throws RemoveUserException{
 		return new ResponseEntity<>(userService.removeUser(user_id), HttpStatus.OK);
 	}
 	

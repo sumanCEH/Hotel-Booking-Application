@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.hba.entity.User;
+import com.cg.hba.exceptions.RemoveUserException;
+import com.cg.hba.exceptions.UserNotFoundException;
 import com.cg.hba.repositoy.UserRepository;
 
 
@@ -25,20 +27,21 @@ public class UserServiceImpl implements UserService {
 
 	
 	//add user
+	
 	@Override
 	public User addUser(User user) {
 		return userRepository.save(user);
 		
 	}
 
+	
 	//update user
 	
-	
 	@Override
-	public User updateUser(Integer user_id , User user) {
+	public User updateUser(Integer user_id , User user) throws UserNotFoundException {
 		
 		
-    User userDB = userRepository.findById(user_id).get();
+        User userDB = userRepository.findById(user_id).get();
 		
 		// checking if passed User object properties are null or blank
 		if(Objects.nonNull(user.getUser_name()) && !"".equalsIgnoreCase(user.getUser_name())) {
@@ -68,33 +71,49 @@ public class UserServiceImpl implements UserService {
 		
 		return userRepository.save(userDB);	}
 
+	
+	
 	//remove user
+	
 	@Override
-	public String removeUser(Integer user_id) {
-		 userRepository.deleteById(user_id);
+	public String removeUser(Integer user_id) throws RemoveUserException {
+		
+		if(userRepository.findById(user_id).isPresent()) {
+		userRepository.deleteById(user_id);
 		 return "deleted user";
-			 
+		}else {
+			throw new RemoveUserException("User Not Found");
+			
+		}
+
 	}
 
 	
 	//Show all user
+	
 	@Override
-	public List<User> ShowAllUser() {
+	public List<User> ShowAllUser() throws UserNotFoundException {
 		List<User> list=(List<User>) userRepository.findAll();
+		if(list.isEmpty()) {
+			throw new UserNotFoundException("No User Found");
+		}
         return list;
 	}
 
 	
+	
 	//show user
+	
 	@Override
-	public User ShowUser(Integer user_id) {
-		User users = userRepository.findById(user_id).get();
-		return users;
+	public User ShowUser(Integer user_id) throws UserNotFoundException {
+		
+		if(userRepository.findById(user_id).isPresent()) {
+			User user = userRepository.findById(user_id).get();
+			return user;	
+		}
+		else throw new UserNotFoundException("User Not Found");
+		
 	}
 
-
-
-		
-	
 	
 }
