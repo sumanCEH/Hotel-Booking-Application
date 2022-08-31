@@ -1,6 +1,7 @@
 package com.cg.hba.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.transaction.Transactional;
 
@@ -22,38 +23,78 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	User user ;
 
+	
+	//add user
 	@Override
-	public User addUser(User user, UserRepository userRepository) {
-		// TODO Auto-generated method stub
-		return null;
+	public User addUser(User user) {
+		return userRepository.save(user);
+		
 	}
 
+	//update user
+	
+	
 	@Override
-	public User updateUser(Integer user_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public User updateUser(Integer user_id , User user) {
+		
+		
+    User userDB = userRepository.findById(user_id).get();
+		
+		// checking if passed User object properties are null or blank
+		if(Objects.nonNull(user.getUser_name()) && !"".equalsIgnoreCase(user.getUser_name())) {
+			userDB.setUser_name(user.getUser_name());
+		}
+		
+		if(Objects.nonNull(user.getEmail()) && !"".equalsIgnoreCase(user.getEmail())) {
+			userDB.setEmail(user.getEmail());
+		}
+		
+		if(Objects.nonNull(user.getPassword()) && !"".equalsIgnoreCase(user.getPassword())) {
+			userDB.setPassword(user.getPassword());
+		}
+		
 
+		if(Objects.nonNull(user.getRole()) && !"".equalsIgnoreCase(user.getRole())) {
+			userDB.setRole(user.getRole());
+		}
+		
+		if(Objects.nonNull(user.getMobile()) && !"".equalsIgnoreCase(user.getMobile())) {
+			userDB.setMobile(user.getMobile());
+		}
+		
+		if(Objects.nonNull(user.getAddress()) && !"".equalsIgnoreCase(user.getAddress())) {
+			userDB.setAddress(user.getAddress());
+		}
+		
+		return userRepository.save(userDB);	}
+
+	//remove user
 	@Override
-	public User removeUser(Integer user_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public String removeUser(Integer user_id) {
+		 userRepository.deleteById(user_id);
+		 return "deleted user";
+			 
 	}
-
-	@Override
-	public List<User> ShowAllUser() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User ShowUser(Integer user_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	
+	//Show all user
+	@Override
+	public List<User> ShowAllUser() {
+		List<User> list=(List<User>) userRepository.findAll();
+        return list;
+	}
+
+	
+	//show user
+	@Override
+	public User ShowUser(Integer user_id) {
+		User users = userRepository.findById(user_id).get();
+		return users;
+	}
+
+
+
+		
 	
 	
 }

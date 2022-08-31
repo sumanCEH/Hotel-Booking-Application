@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int user_id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer user_id;
 
 	private String user_name;	
 	private String email;
@@ -30,7 +30,7 @@ public class User {
 	}
 
 
-	public User(int user_id, String user_name, String email, String password, String role, String mobile,
+	public User(Integer user_id, String user_name, String email, String password, String role, String mobile,
 			String address) {
 		super();
 		this.user_id = user_id;
@@ -43,12 +43,12 @@ public class User {
 	}
 
 
-	public int getUser_id() {
+	public Integer getUser_id() {
 		return user_id;
 	}
 
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
 
