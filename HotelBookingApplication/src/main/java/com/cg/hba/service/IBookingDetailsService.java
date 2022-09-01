@@ -10,9 +10,9 @@ import com.cg.hba.exceptions.BookingDetailsNotFoundException;
 @Service
 public interface IBookingDetailsService {
 
-	BookingDetails addBookingDetails(BookingDetails bookingdetails);
-	BookingDetails updateBookingDetails(BookingDetails bookingdetails) throws BookingDetailsNotFoundException;
-	String removeBookingDetails(int booking_id) throws BookingDetailsNotFoundException;
-	List<BookingDetails> showAllBookingDetails() throws BookingDetailsNotFoundException;
-	BookingDetails showBookingDetails(int booking_id) throws BookingDetailsNotFoundException;
+	public BookingDetails addBookingDetails(BookingDetails bookingdetails);
+	public BookingDetails updateBookingDetails(BookingDetails bookingdetails) throws BookingDetailsNotFoundException;
+	public String removeBookingDetails(int booking_id) throws BookingDetailsNotFoundException;
+	public List<BookingDetails> showAllBookingDetails() throws BookingDetailsNotFoundException;
+	public BookingDetails showBookingDetails(int booking_id) throws BookingDetailsNotFoundException;
 }
