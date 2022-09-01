@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.hba.entity.BookingDetails;
+import com.cg.hba.exceptions.BookingDetailsNotFoundException;
 import com.cg.hba.service.IBookingDetailsService;
 
 @RestController
@@ -22,7 +23,7 @@ public class BookingDetailsController {
 	IBookingDetailsService service;
 	
 	@RequestMapping("/view")
-	public ResponseEntity<?> listBookingDetails(){		
+	public ResponseEntity<?> listBookingDetails() throws BookingDetailsNotFoundException{		
 		return new ResponseEntity<>(service.showAllBookingDetails(),HttpStatus.OK);
 	}
 	
@@ -32,17 +33,17 @@ public class BookingDetailsController {
 	}
 	
 	@GetMapping("/getbyid/{booking_id}")
-	public ResponseEntity<?> getBookingDetails(@PathVariable("booking_id") Integer booking_id ) {		
+	public ResponseEntity<?> getBookingDetails(@PathVariable("booking_id") Integer booking_id ) throws BookingDetailsNotFoundException {		
 		return new ResponseEntity<>(service.showBookingDetails(booking_id), HttpStatus.OK);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<?> update(@RequestBody BookingDetails bd) {		
+	public ResponseEntity<?> update(@RequestBody BookingDetails bd) throws BookingDetailsNotFoundException {		
 		return new ResponseEntity<>(service.updateBookingDetails(bd), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{booking_id}")
-	public ResponseEntity<?> remove(@PathVariable("booking_id") Integer booking_id ){
+	public ResponseEntity<?> remove(@PathVariable("booking_id") Integer booking_id ) throws BookingDetailsNotFoundException{
 		return new ResponseEntity<>(service.removeBookingDetails(booking_id), HttpStatus.OK);
 	}
 }

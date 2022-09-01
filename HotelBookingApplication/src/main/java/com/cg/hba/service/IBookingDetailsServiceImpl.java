@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.hba.entity.BookingDetails;
+import com.cg.hba.exceptions.BookingDetailsNotFoundException;
 import com.cg.hba.repositoy.IBookingDetailsRepository;
 
 @Service
@@ -24,32 +25,45 @@ public class IBookingDetailsServiceImpl implements IBookingDetailsService{
 	}
 
 	@Override
-	public BookingDetails updateBookingDetails(BookingDetails bookingdetails) {
-		BookingDetails bd = repo.getById(bookingdetails.getBooking_id());
-		bd.setBooked_from(bookingdetails.getBooked_from());
-		bd.setBooked_to(bookingdetails.getBooked_to());
-		bd.setNo_of_adults(bookingdetails.getNo_of_adults());
-		bd.setNo_of_children(bookingdetails.getNo_of_children());
-		return bd;
+	public BookingDetails updateBookingDetails(BookingDetails bookingdetails) throws BookingDetailsNotFoundException {
+		if(repo.findById(bookingdetails.getBooking_id()).isPresent()) {
+		    BookingDetails bd = repo.getById(bookingdetails.getBooking_id());
+		    bd.setBooked_from(bookingdetails.getBooked_from());
+		    bd.setBooked_to(bookingdetails.getBooked_to());
+		    bd.setNo_of_adults(bookingdetails.getNo_of_adults());
+		    bd.setNo_of_children(bookingdetails.getNo_of_children());
+		    return bd;
+		}
+		else
+			throw new BookingDetailsNotFoundException("Booking details are not found");
 	}
 
 	@Override
-	public BookingDetails removeBookingDetails(int booking_id) {
-		 BookingDetails bd= repo.getById(booking_id);
-		 repo.deleteById(booking_id);
-		 return bd;
+	public String removeBookingDetails(int booking_id) throws BookingDetailsNotFoundException{
+		if(repo.findById(booking_id).isPresent()) {
+		   BookingDetails bd= repo.getById(booking_id);
+		   repo.deleteById(booking_id);
+		   return "Booking details are deleted";
+	   }else
+		   throw new BookingDetailsNotFoundException("Booking details are not found");
 	}
 
 	@Override
-	public List<BookingDetails> showAllBookingDetails() {
+	public List<BookingDetails> showAllBookingDetails() throws BookingDetailsNotFoundException{
 		List<BookingDetails> list=repo.findAll();
+		if(list.isEmpty())
+			throw new BookingDetailsNotFoundException("Booking details are not found");
 	    return list;
 	}
 
 	@Override
-	public BookingDetails showBookingDetails(int booking_id) {
-		BookingDetails bd= repo.getById(booking_id);
-		return bd;
+	public BookingDetails showBookingDetails(int booking_id) throws BookingDetailsNotFoundException{
+		if(repo.findById(booking_id).isPresent()) {
+		    BookingDetails bd= repo.getById(booking_id);
+		    return bd;
+		}
+		else
+			throw new BookingDetailsNotFoundException("Booking details are not found");
 	}
 
 }
