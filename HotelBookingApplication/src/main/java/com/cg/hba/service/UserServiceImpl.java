@@ -40,10 +40,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(Integer user_id , User user) throws UserNotFoundException {
 		
-		
         User userDB = userRepository.findById(user_id).get();
-		
+        
+   
 		// checking if passed User object properties are null or blank
+        
 		if(Objects.nonNull(user.getUser_name()) && !"".equalsIgnoreCase(user.getUser_name())) {
 			userDB.setUser_name(user.getUser_name());
 		}
