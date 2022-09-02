@@ -4,7 +4,7 @@ import com.cg.hba.entity.Admin;
 
 public interface AdminService {
 
-	public Admin signin(Admin admin);
-	public Admin signout(Admin admin);
+	public String signIn(String adminName, String adminPassword);
+	public Admin register(Admin admin);
 	
 }

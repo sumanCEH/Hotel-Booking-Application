@@ -16,19 +16,28 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminRepository adminRepository;
 	
-	@Autowired
-	Admin admin ;
+//	@Autowired
+//	Admin admin ;
 
 	@Override
-	public Admin signin(Admin admin) {
-		// TODO Auto-generated method stub
-		return null;
+	public Admin register(Admin admin) {
+		return adminRepository.save(admin);
 	}
 
 	@Override
-	public Admin signout(Admin admin) {
-		// TODO Auto-generated method stub
-		return null;
+	public String signIn(String adminName, String adminPassword) {
+		
+		Admin adminDb = adminRepository.getCredentials(adminName, adminPassword);
+		
+		if (adminDb != null) {
+			if(adminDb.getAdmin_name().equals(adminName) == true && adminDb.getPassword().equals(adminPassword) == true) {
+				return "okk";
+			}
+			else {
+				return "unauthorised access";
+			}
+		}
+		return "invalid credentials";
 	}
 
 }
