@@ -22,8 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class BookingDetails implements Serializable{
 
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)	
+ @Id	
  private int booking_id;
  private int hotel_id;
  private int room_id;

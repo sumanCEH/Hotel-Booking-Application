@@ -31,7 +31,6 @@ public class IBookingDetailsServiceImpl implements IBookingDetailsService{
 		    bd.setBooked_to(bookingdetails.getBooked_to());
 		    bd.setNo_of_adults(bookingdetails.getNo_of_adults());
 		    bd.setNo_of_children(bookingdetails.getNo_of_children());
-            bd.setAmount(bookingdetails.getAmount());
 		    return bd;
 		}
 		else
