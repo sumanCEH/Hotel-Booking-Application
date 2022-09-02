@@ -30,6 +30,19 @@ class HotelBookingApplicationTests{
 		}
 	
 	@Test
+	void testsaveBookingDetails() {
+		BookingDetails bd = new BookingDetails(3,106,114,new Date(),new Date(),2,2,7000);
+		repo.save(bd);
+		Iterable<BookingDetails> it= repo.findAll();
+		List<BookingDetails> list = new ArrayList<>();
+		for (BookingDetails b : it) {
+			list.add(b);
+		}
+		assertThat(list.size()).isEqualTo(1);
+		repo.deleteAll();
+		}
+	
+	@Test
 	void testupdateBookingDetailsbyId() {
 		BookingDetails bd = new BookingDetails(3,106,114,new Date(),new Date(),2,2,8000);
 		repo.save(bd);
